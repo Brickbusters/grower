@@ -21,5 +21,31 @@ class ViewController: UIViewController {
     }
 
 
+    @IBOutlet weak var shelvesView: ShelvesView!
+    
+    @IBOutlet weak var boxView: BoxView! {
+        didSet {
+            let upSwipe = UISwipeGestureRecognizer(target: self, action: #selector(openCloseBox))
+            upSwipe.direction = .up
+            let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(openCloseBox))
+            downSwipe.direction = .down
+            boxView.addGestureRecognizer(upSwipe)
+            boxView.addGestureRecognizer(downSwipe)
+        }
+    }
+    
+    @IBOutlet weak var monitorView: MonitorView!
+    @IBOutlet weak var playView: PlayView!
+    
+    @objc func openCloseBox(_ sender: UISwipeGestureRecognizer) {
+        switch sender.direction {
+        case .up:
+            boxView.lidOpen = true
+        case .down:
+            boxView.lidOpen = false
+        default:
+            break
+        }
+    }
 }
 

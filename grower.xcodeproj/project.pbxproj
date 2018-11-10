@@ -12,6 +12,12 @@
 		51F060FB2196649500F428D9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 51F060F92196649500F428D9 /* Main.storyboard */; };
 		51F060FD2196649500F428D9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 51F060FC2196649500F428D9 /* Assets.xcassets */; };
 		51F061002196649500F428D9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 51F060FE2196649500F428D9 /* LaunchScreen.storyboard */; };
+		51F061082196651B00F428D9 /* BoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F061072196651B00F428D9 /* BoxView.swift */; };
+		51F0610A219666F700F428D9 /* ShelvesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F06109219666F700F428D9 /* ShelvesView.swift */; };
+		51F0610C2196671500F428D9 /* MonitorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F0610B2196671500F428D9 /* MonitorView.swift */; };
+		51F0610E2196673A00F428D9 /* PlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F0610D2196673A00F428D9 /* PlayView.swift */; };
+		51F0611021966BDF00F428D9 /* GuiUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F0610F21966BDF00F428D9 /* GuiUtil.swift */; };
+		51F0611221966CC200F428D9 /* GrowerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F0611121966CC200F428D9 /* GrowerData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +28,12 @@
 		51F060FC2196649500F428D9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		51F060FF2196649500F428D9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		51F061012196649500F428D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		51F061072196651B00F428D9 /* BoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxView.swift; sourceTree = "<group>"; };
+		51F06109219666F700F428D9 /* ShelvesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelvesView.swift; sourceTree = "<group>"; };
+		51F0610B2196671500F428D9 /* MonitorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonitorView.swift; sourceTree = "<group>"; };
+		51F0610D2196673A00F428D9 /* PlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayView.swift; sourceTree = "<group>"; };
+		51F0610F21966BDF00F428D9 /* GuiUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuiUtil.swift; sourceTree = "<group>"; };
+		51F0611121966CC200F428D9 /* GrowerData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrowerData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +69,12 @@
 				51F060F52196649500F428D9 /* AppDelegate.swift */,
 				51F060F72196649500F428D9 /* ViewController.swift */,
 				51F060F92196649500F428D9 /* Main.storyboard */,
+				51F0610F21966BDF00F428D9 /* GuiUtil.swift */,
+				51F0611121966CC200F428D9 /* GrowerData.swift */,
+				51F06109219666F700F428D9 /* ShelvesView.swift */,
+				51F061072196651B00F428D9 /* BoxView.swift */,
+				51F0610B2196671500F428D9 /* MonitorView.swift */,
+				51F0610D2196673A00F428D9 /* PlayView.swift */,
 				51F060FC2196649500F428D9 /* Assets.xcassets */,
 				51F060FE2196649500F428D9 /* LaunchScreen.storyboard */,
 				51F061012196649500F428D9 /* Info.plist */,
@@ -135,8 +153,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				51F0610E2196673A00F428D9 /* PlayView.swift in Sources */,
 				51F060F82196649500F428D9 /* ViewController.swift in Sources */,
+				51F0611021966BDF00F428D9 /* GuiUtil.swift in Sources */,
+				51F0611221966CC200F428D9 /* GrowerData.swift in Sources */,
+				51F0610A219666F700F428D9 /* ShelvesView.swift in Sources */,
 				51F060F62196649500F428D9 /* AppDelegate.swift in Sources */,
+				51F0610C2196671500F428D9 /* MonitorView.swift in Sources */,
+				51F061082196651B00F428D9 /* BoxView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
