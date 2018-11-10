@@ -17,5 +17,23 @@ class ShelvesView: UIView {
         // Drawing code
     }
     */
+    
+    override func draw(_ rect: CGRect) {
+        
+        let origin = CGPoint(x: 40, y: 150)
+        let h = CGFloat(400)
+        let d = CGFloat(180)
+        
+        // Drawing code
+        let f1 = origin
+        let f4 = CGPoint(x: f1.x, y: f1.y + h)
+        
+        let a = d / CGFloat(2).squareRoot()
+        let b1 = CGPoint(x: f1.x + a, y: f1.y - a)
+        let b4 = CGPoint(x: f4.x + a, y: f4.y - a)
+        
+        // Draw side and fill
 
+        let _ = drawSide(f4,f1,b1,b4,UIColor.green)
+    }
 }
