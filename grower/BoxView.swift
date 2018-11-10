@@ -41,14 +41,14 @@ class BoxView: UIView {
         
         let back = drawSide(b1, b2, b3, b4, UIColor.lightGray)
         let sideBottom = drawSide(f3,f4,b4,b3,UIColor.darkGray)
-        let sideRight = drawSide(f2,f3,b3,b2,UIColor.brown)
+        let sideRight = drawSide(f2,f3,b3,b2,UIColor.green)
         let sideLeft = drawSide(f4,f1,b1,b4,UIColor.gray)
-        let front = drawSide(f1, f2, f3, f4, UIColor.brown)
+        let front = drawSide(f1, f2, f3, f4, UIColor.green)
         
         if lidOpen {
             let lid = drawSide(b1,b2,l2,l1,UIColor.lightGray)
         } else{
-            let sideTop = drawSide(f1,f2,b2,b1,UIColor.brown)
+            let sideTop = drawSide(f1,f2,b2,b1,UIColor.green)
         }
     }
 }
