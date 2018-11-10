@@ -13,7 +13,7 @@ import Foundation
  */
 enum Plant : String {
     case Kale
-    case Blackberry
+    case Blueberry
 }
 
 enum Condition {
@@ -79,7 +79,7 @@ let data: [[(UInt, UInt)]] = [
 class GrowerDatabase {
     var experiments: [Plant: [UInt: Experiment]] = [
         Plant.Kale: [UInt: Experiment](),
-        Plant.Blackberry: [UInt: Experiment]()
+        Plant.Blueberry: [UInt: Experiment]()
     ]
 
     init() {
@@ -97,8 +97,8 @@ class GrowerDatabase {
                 measurements: [EnvDataPoint]()
             )
             
-            experiments[Plant.Blackberry]![power] = Experiment(
-                plant: Plant.Blackberry,
+            experiments[Plant.Blueberry]![power] = Experiment(
+                plant: Plant.Blueberry,
                 light: power,
                 result: bbCondition,
                 measurements: [EnvDataPoint]()
@@ -113,7 +113,7 @@ class GrowerDatabase {
                 
                 experiments[Plant.Kale]![power]!.measurements.append(
                     EnvDataPoint(brightness: lux, temp: temp))
-                experiments[Plant.Blackberry]![power]!.measurements.append(
+                experiments[Plant.Blueberry]![power]!.measurements.append(
                     EnvDataPoint(brightness: lux, temp: temp))
             }
         }
