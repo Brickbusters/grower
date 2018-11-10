@@ -21,14 +21,14 @@ class MonitorView: UIView {
      let bottomleft = CGPoint(x: topleft.x,y: topleft.y + h)
      let bottomright = CGPoint(x: bottomleft.x + w, y: bottomleft.y)
      let topright = CGPoint(x: topleft.x + w, y: topleft.y)
-        let side = UIBezierPath()
-        side.move(to: topleft)
-        side.addLine(to: bottomleft)
-        side.addLine(to: bottomright)
-        side.addLine(to: topright)
+     let side = UIBezierPath()
+     side.move(to: topleft)
+     side.addLine(to: bottomleft)
+     side.addLine(to: bottomright)
+     side.addLine(to: topright)
         
-        UIColor.black.setStroke()
-        side.stroke()
+     UIColor.black.setStroke()
+     side.stroke()
         
     }
     
