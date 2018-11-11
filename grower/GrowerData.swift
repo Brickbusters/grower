@@ -40,7 +40,7 @@ struct Experiment: CustomStringConvertible {
     var measurements: [EnvDataPoint] // assume one data point every 12 hours
     
     public var description: String {
-        return "\(plant) + \(light): \(measurements)"
+        return "\(plant) + \(light): \(result) \(measurements)"
     }
 }
 
@@ -50,9 +50,9 @@ struct Experiment: CustomStringConvertible {
 // TODO - read from file or google doc
 let box: [(UInt, Condition, Condition)] = [
     (80, Condition.Survived, Condition.Survived),
-    (120, Condition.Survived, Condition.Survived),
-    (160, Condition.Died, Condition.Died),
-    (200, Condition.Died, Condition.Died)
+    (130, Condition.Survived, Condition.Survived),
+    (200, Condition.Died, Condition.Died),
+    (400, Condition.Died, Condition.Died)
 ]
 
 // Each column "box1 (brightnewss, temp)", "box2 (brightness, temp)", ..
@@ -116,6 +116,14 @@ class GrowerDatabase {
                 experiments[Plant.Blueberry]![power]!.measurements.append(
                     EnvDataPoint(brightness: lux, temp: temp))
             }
+        }
+    }
+    
+    func getExperiment(plant: Plant, watt: UInt) -> Experiment? {
+        if let dataByPlant = experiments[plant] {
+            return dataByPlant[watt]
+        } else {
+            return nil
         }
     }
 }
