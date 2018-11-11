@@ -18,6 +18,8 @@
 		51F0610E2196673A00F428D9 /* PlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F0610D2196673A00F428D9 /* PlayView.swift */; };
 		51F0611021966BDF00F428D9 /* GuiUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F0610F21966BDF00F428D9 /* GuiUtil.swift */; };
 		51F0611221966CC200F428D9 /* GrowerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F0611121966CC200F428D9 /* GrowerData.swift */; };
+		FC3F9DB32197B3E500274FED /* Kale.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FC3F9DB12197B3E500274FED /* Kale.jpg */; };
+		FC3F9DB42197B3E500274FED /* Blueberry.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FC3F9DB22197B3E500274FED /* Blueberry.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +36,8 @@
 		51F0610D2196673A00F428D9 /* PlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayView.swift; sourceTree = "<group>"; };
 		51F0610F21966BDF00F428D9 /* GuiUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuiUtil.swift; sourceTree = "<group>"; };
 		51F0611121966CC200F428D9 /* GrowerData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrowerData.swift; sourceTree = "<group>"; };
+		FC3F9DB12197B3E500274FED /* Kale.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Kale.jpg; sourceTree = "<group>"; };
+		FC3F9DB22197B3E500274FED /* Blueberry.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Blueberry.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +80,8 @@
 				51F0610B2196671500F428D9 /* MonitorView.swift */,
 				51F0610D2196673A00F428D9 /* PlayView.swift */,
 				51F060FC2196649500F428D9 /* Assets.xcassets */,
+				FC3F9DB22197B3E500274FED /* Blueberry.jpg */,
+				FC3F9DB12197B3E500274FED /* Kale.jpg */,
 				51F060FE2196649500F428D9 /* LaunchScreen.storyboard */,
 				51F061012196649500F428D9 /* Info.plist */,
 			);
@@ -140,7 +146,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC3F9DB32197B3E500274FED /* Kale.jpg in Resources */,
 				51F061002196649500F428D9 /* LaunchScreen.storyboard in Resources */,
+				FC3F9DB42197B3E500274FED /* Blueberry.jpg in Resources */,
 				51F060FD2196649500F428D9 /* Assets.xcassets in Resources */,
 				51F060FB2196649500F428D9 /* Main.storyboard in Resources */,
 			);
