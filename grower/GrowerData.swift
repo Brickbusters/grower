@@ -16,13 +16,15 @@ enum Plant : String {
     case Blueberry
 }
 
-enum Condition {
+enum Condition : String {
     case Died
     case Survived
     case Thrived
 }
 
 struct EnvDataPoint: CustomStringConvertible {
+    var time: String
+    
     // in unit of lux
     var brightness: UInt
     // in unit of fahrenheit
@@ -56,21 +58,21 @@ let box: [(UInt, Condition, Condition)] = [
 ]
 
 // Each column "box1 (brightnewss, temp)", "box2 (brightness, temp)", ..
-let data: [[(UInt, UInt)]] = [
-    [(200, 75), (500, 75), (1200, 75), (2000, 75)], // day 1
-    [(0, 65), (0, 65), (0, 65), (0, 65)],
-    [(200, 75), (500, 75), (1200, 75), (2000, 75)], // day 2
-    [(0, 65), (0, 65), (0, 65), (0, 65)],
-    [(200, 75), (500, 75), (1200, 75), (2000, 75)], // day 3
-    [(0, 65), (0, 65), (0, 65), (0, 65)],
-    [(200, 75), (500, 75), (1200, 75), (2000, 75)], // day 4
-    [(0, 65), (0, 65), (0, 65), (0, 65)],
-    [(200, 75), (500, 75), (1200, 75), (2000, 75)], // day 5
-    [(0, 65), (0, 65), (0, 65), (0, 65)],
-    [(200, 75), (500, 75), (1200, 75), (2000, 75)], // day 6
-    [(0, 65), (0, 65), (0, 65), (0, 65)],
-    [(200, 75), (500, 75), (1200, 75), (2000, 75)], // day 7
-    [(0, 65), (0, 65), (0, 65), (0, 65)]
+let data: [(String, [(UInt, UInt)])] = [
+    ("Day 1",   [(200, 75), (500, 75), (1200, 75), (2000, 75)]), // day 1
+    ("Night 1", [(0, 65), (0, 65), (0, 65), (0, 65)]),
+    ("Day 2",   [(200, 75), (500, 75), (1200, 75), (2000, 75)]), // day 2
+    ("Night 2", [(0, 65), (0, 65), (0, 65), (0, 65)]),
+    ("Day 3",   [(200, 75), (500, 75), (1200, 75), (2000, 75)]), // day 3
+    ("Night 3", [(0, 65), (0, 65), (0, 65), (0, 65)]),
+    ("Day 4",   [(200, 75), (500, 75), (1200, 75), (2000, 75)]), // day 4
+    ("Night 4", [(0, 65), (0, 65), (0, 65), (0, 65)]),
+    ("Day 5",   [(200, 75), (500, 75), (1200, 75), (2000, 75)]), // day 5
+    ("Night 5", [(0, 65), (0, 65), (0, 65), (0, 65)]),
+    ("Day 6",   [(200, 75), (500, 75), (1200, 75), (2000, 75)]), // day 6
+    ("Night 6", [(0, 65), (0, 65), (0, 65), (0, 65)]),
+    ("Day 7",   [(200, 75), (500, 75), (1200, 75), (2000, 75)]), // day 7
+    ("Night 7", [(0, 65), (0, 65), (0, 65), (0, 65)])
 ]
 
 /*
@@ -105,16 +107,18 @@ class GrowerDatabase {
             )
         }
         
-        for line in data {
+        for reading in data {
+            let time = reading.0
+            let series = reading.1
             for index in 0..<4 {
                 let power = box[index].0
-                let temp = line[index].0
-                let lux = line[index].1
+                let lux = series[index].0
+                let temp = series[index].1
                 
                 experiments[Plant.Kale]![power]!.measurements.append(
-                    EnvDataPoint(brightness: lux, temp: temp))
+                    EnvDataPoint(time: time, brightness: lux, temp: temp))
                 experiments[Plant.Blueberry]![power]!.measurements.append(
-                    EnvDataPoint(brightness: lux, temp: temp))
+                    EnvDataPoint(time: time, brightness: lux, temp: temp))
             }
         }
     }

@@ -83,6 +83,9 @@ class ViewController: UIViewController, UIDropInteractionDelegate,
     }
     
     @IBOutlet weak var monitorView: MonitorView!
+    @IBOutlet weak var plantCondition: UILabel!
+    @IBOutlet weak var timeOfExperiment: UILabel!
+    
     @IBOutlet weak var playView: PlayView!
     
     @objc func openCloseBox(_ sender: UISwipeGestureRecognizer) {
@@ -152,7 +155,10 @@ class ViewController: UIViewController, UIDropInteractionDelegate,
                     playTimer = Timer.scheduledTimer(
                         timeInterval: 1.0, target: self, selector: #selector(showData),
                         userInfo: nil, repeats: true)
+                    boxView.lidOpen = false
                     playing = true
+                    timeOfExperiment.text = "Time"
+                    plantCondition.text = "Result"
                 }
             }
         }
@@ -165,9 +171,12 @@ class ViewController: UIViewController, UIDropInteractionDelegate,
                 if currentSet >= experiment.measurements.count {
                     timer.invalidate()
                     playing = false
+                    plantCondition.text = experiment.result.rawValue
                 } else {
                     let data = experiment.measurements[currentSet]
-                    print("Timer \(data)")
+                    timeOfExperiment.text = data.time
+                    monitorView.temperature = data.temp
+                    monitorView.lux = data.brightness
                     currentSet += 1
                 }
             } else {
