@@ -36,7 +36,7 @@ class MonitorView: UIView {
     // An empty implementation adversely affects performance during animation.
     override func draw(_ rect: CGRect) {
         // Drawing code
-        let topleft = CGPoint (x: 50, y: 180)
+        let topleft = CGPoint (x: 45, y: 180)
         let h = CGFloat(400)
         let w = CGFloat(130)
         let bottomleft = CGPoint(x: topleft.x,y: topleft.y + h)
@@ -95,5 +95,18 @@ class MonitorView: UIView {
                      x: t60.x - 45, y: t60.y - 20, width: 35, height: 40)
         displayLabel(label: tempLabel50, text: "50",
                      x: t50.x - 45, y: t50.y - 20, width: 35, height: 40)
+        
+        
+        displayLabel(label: luxLabel2000, text: "2000",
+                     x: topright.x + 11, y: topright.y - 20, width: 50, height: 40)
+        displayLabel(label: luxLabel1500, text: "1500",
+                     x: l1500.x + 11, y: l1500.y - 20, width: 50, height: 40)
+        displayLabel(label: luxLabel1000, text: "1000",
+                     x: l1000.x + 11, y: l1000.y - 20, width: 50, height: 40)
+        displayLabel(label: luxLabel500, text: "500",
+                     x: l500.x + 11, y: l500.y - 20, width: 40, height: 40)
+
+        
+        
     }
 }
