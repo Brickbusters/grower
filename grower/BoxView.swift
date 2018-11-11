@@ -14,6 +14,16 @@ class BoxView: UIView {
     let w = CGFloat(250)
     let d = CGFloat(180)
     let t = CGFloat(180 * 1.2)
+    let plantCaption = UILabel()
+    
+    
+    var plantInBox : Plant?{
+        didSet{
+            setNeedsDisplay()
+        }
+    }
+    
+    
 
     let growerData = GrowerDatabase()
     
@@ -47,9 +57,26 @@ class BoxView: UIView {
         let _ = drawSide(f1, f2, f3, f4, UIColor.green)
         
         if lidOpen {
-             let _ = drawSide(b1,b2,l2,l1,UIColor.lightGray)
+            let _ = drawSide(b1,b2,l2,l1,UIColor.lightGray)
         } else{
-             let _ = drawSide(f1,f2,b2,b1,UIColor.green)
+            let _ = drawSide(f1,f2,b2,b1,UIColor.green)
         }
+        if let plant = plantInBox {
+            displayLabel(label: plantCaption, text: plant.rawValue, x: 50,
+                         y: 400, width: w, height: h)
+        } else {
+            plantCaption.removeFromSuperview()
+        }
+    }
+    func displayLabel(label: UILabel, text: String,
+                      x: CGFloat, y: CGFloat,
+                      width: CGFloat, height: CGFloat) {
+        addSubview(label)
+        label.text = text
+        label.font = label.font.withSize(60)
+        label.frame = CGRect(x: x, y: y, width: width, height: height)
+        label.center = CGPoint(x: x + width / 2, y: y + height / 2)
+        label.textAlignment = .right
+        label.setNeedsDisplay()
     }
 }

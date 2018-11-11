@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UIDropInteractionDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +39,7 @@ class ViewController: UIViewController {
             downSwipe.direction = .down
             boxView.addGestureRecognizer(upSwipe)
             boxView.addGestureRecognizer(downSwipe)
+            boxView.addInteraction(UIDropInteraction(delegate: self))
         }
     }
     
@@ -55,5 +56,25 @@ class ViewController: UIViewController {
             break
         }
     }
+    func dropInteraction(_ interaction: UIDropInteraction, canHandle session: UIDropSession) -> Bool {
+        return session.canLoadObjects(ofClass: NSString.self) && boxView.lidOpen
+    }
+    
+    func dropInteraction(_ interaction: UIDropInteraction,
+                         sessionDidUpdate session: UIDropSession) -> UIDropProposal {
+        return UIDropProposal(operation: .copy)
+    }
+    
+    func dropInteraction(_ interaction: UIDropInteraction, performDrop session: UIDropSession) {
+        print("Drop has happend")
+        
+        
+        session.loadObjects(ofClass: NSString.self) { [unowned self] plants in
+            if let plant = plants.first as? String{
+                print("Dropped\(plant)")
+                self.boxView.plantInBox = Plant(rawValue: plant)
+            }
+            
+        }
+    }
 }
-
