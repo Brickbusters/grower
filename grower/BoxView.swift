@@ -23,7 +23,13 @@ class BoxView: UIView {
         }
     }
     
-    
+    let lightRadius = [CGFloat(20), CGFloat(24), CGFloat(28), CGFloat(32)]
+    let lightBrightness = [CGFloat(0.85), CGFloat(0.89), CGFloat(0.92), CGFloat(0.95)]
+    var lightChoice = 0 {
+        didSet {
+            setNeedsDisplay()
+        }
+    }
 
     let growerData = GrowerDatabase()
     
@@ -33,6 +39,29 @@ class BoxView: UIView {
         }
     }
     
+    func drawLight(center: CGPoint, radius: CGFloat, brightness: CGFloat) {
+        let lightRim = UIBezierPath(
+            arcCenter: center,
+            radius: radius + 10,
+            startAngle: CGFloat(0),
+            endAngle:CGFloat(Double.pi * 2),
+            clockwise: true)
+        let peripheralColor = UIColor(white: brightness + (1.0 - brightness)/2, alpha: 1.0)
+        peripheralColor.setFill()
+        lightRim.fill()
+        
+        let light = UIBezierPath(
+            arcCenter: center,
+            radius: radius,
+            startAngle: CGFloat(0),
+            endAngle:CGFloat(Double.pi * 2),
+            clockwise: true)
+        
+        let centerColor = UIColor(white: brightness, alpha: 1.0)
+        centerColor.setFill()
+        light.fill()
+    }
+
     override func draw(_ rect: CGRect) {
         // Drawing code
         let f1 = origin
@@ -48,6 +77,7 @@ class BoxView: UIView {
         
         let l1 = CGPoint(x: b1.x, y: b1.y - t)
         let l2 = CGPoint(x: b2.x, y: b2.y - t)
+        let lidCenter = CGPoint(x: (b1.x + b2.x) / 2, y: (b1.y + l1.y) / 2)
         
        // Draw back side and fill
         let _ = drawSide(b1, b2, b3, b4, UIColor.lightGray)
@@ -58,6 +88,9 @@ class BoxView: UIView {
         
         if lidOpen {
             let _ = drawSide(b1,b2,l2,l1,UIColor.lightGray)
+            drawLight(center: lidCenter,
+                      radius: lightRadius[lightChoice],
+                      brightness: lightBrightness[lightChoice])
         } else{
             let _ = drawSide(f1,f2,b2,b1,UIColor.green)
         }
