@@ -70,7 +70,7 @@ func chromaKeyFilter(fromHue: CGFloat, toHue: CGFloat) -> CIFilter?
 
 func filterBlueBackground(_ originalUIImage: UIImage) -> UIImage {
     let originalCIImage = CIImage(image: originalUIImage)
-    let chromaCIFilter = chromaKeyFilter(fromHue: 0.55, toHue: 0.75)
+    let chromaCIFilter = chromaKeyFilter(fromHue: 0.60, toHue: 0.65)
     
     chromaCIFilter?.setValue(originalCIImage, forKey: kCIInputImageKey)
     

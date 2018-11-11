@@ -8,8 +8,31 @@
 
 import UIKit
 
-class ShelvesView: UIView {
-
+class ShelvesView: UIView, UIDragInteractionDelegate {
+    var kaleImage: UIImage? {
+        didSet {
+            kaleImageView = UIImageView(image: kaleImage)
+            kaleImageView!.addInteraction(UIDragInteraction(delegate: self))
+            kaleImageView!.isUserInteractionEnabled = true
+            setNeedsDisplay()
+        }
+    }
+    var kaleImageView: UIImageView?
+    
+    var blueberryImage: UIImage? {
+        didSet {
+            blueberryImageView = UIImageView(image: blueberryImage)
+            blueberryImageView?.addInteraction(UIDragInteraction(delegate: self))
+            blueberryImageView!.isUserInteractionEnabled = true
+            setNeedsDisplay()
+        }
+    }
+    var blueberryImageView: UIImageView?
+    
+    func dragInteraction(_ interaction: UIDragInteraction, itemsForBeginning session: UIDragSession) -> [UIDragItem] {
+        return []
+    }
+    
     /*
     // Only override draw() if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
@@ -24,7 +47,6 @@ class ShelvesView: UIView {
         let h = CGFloat(400)
         let w = CGFloat(250)
         let d = CGFloat(180)
-      
         
         // Drawing code
         let f1 = origin
@@ -49,6 +71,9 @@ class ShelvesView: UIView {
         let bl3 = CGPoint(x: bl2.x + h/4 , y: bl2.y )
         let bl4 = CGPoint(x: bl1.x + h/4, y: bl1.y)
         
+        let kaleOrigin = CGPoint(x:fl1.x + 80, y:fl1.y-240)
+        let blueberryOrigin = CGPoint(x:bl1.x - 10, y:bl1.y-220)
+        
         
         // Draw side and fill
 
@@ -56,6 +81,21 @@ class ShelvesView: UIView {
         let _ = drawSide(fl1, fl2, fl3, fl4, UIColor.green)
         let _ = drawSide(bl1, bl2, bl3, bl4, UIColor.green)
         
-        
+        if let kale = kaleImageView{
+            kale.frame = CGRect(x:kaleOrigin.x,
+                                y:kaleOrigin.y,
+                                width: h/4,
+                                height: 180)
+            kale.contentMode = .scaleAspectFill
+            addSubview(kale)
+        }
+        if let Blueberry = blueberryImageView{
+            Blueberry.frame = CGRect(x:blueberryOrigin.x,
+                                y:blueberryOrigin.y,
+                                width: h*3/4,
+                                height: 180)
+            Blueberry.contentMode = .scaleAspectFill
+            addSubview(Blueberry)
+        }
     }
 }

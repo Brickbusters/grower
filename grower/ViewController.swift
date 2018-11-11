@@ -21,7 +21,15 @@ class ViewController: UIViewController {
     }
 
 
-    @IBOutlet weak var shelvesView: ShelvesView!
+    @IBOutlet weak var shelvesView: ShelvesView! {
+        didSet {
+            let kaleImage = filterBlueBackground(UIImage(named: "Kale.jpg")!)
+            let bbImage = filterBlueBackground(UIImage(named: "Blueberry.jpg")!)
+            
+            shelvesView.kaleImage = kaleImage
+            shelvesView.blueberryImage = bbImage
+        }
+    }
     
     @IBOutlet weak var boxView: BoxView! {
         didSet {
