@@ -62,6 +62,7 @@ class ViewController: UIViewController, UIDropInteractionDelegate,
     }
     
     var lightPictures = ["Lightbulb80.jpg", "Lightbulb130.jpg", "Lightbulb200.jpg", "Lightbulb400.jpg"]
+    var lightWatts: [UInt] = [80, 130, 200, 400]
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return lightPictures.count
     }
@@ -126,27 +127,58 @@ class ViewController: UIViewController, UIDropInteractionDelegate,
         }
     }
     
-    var playing = false
+    var playing = false {
+        didSet {
+            if playing {
+                controlButton.setBackgroundImage(UIImage(named: "stop button.png"), for: UIControlState.normal)
+            } else {
+                controlButton.setBackgroundImage(UIImage(named: "play button.png"), for: UIControlState.normal)
+            }
+        }
+    }
     @IBOutlet weak var controlButton: UIButton!
     
     @IBAction func playButton(_ sender: UIButton) {
-        controlButton.setBackgroundImage(UIImage(named: "stop button.png"), for: UIControlState.normal)
-        print("button clicked")
-        
         if (playing) {
-            print("button clicked")
-            controlButton.setBackgroundImage(UIImage(named: "play button.png"), for: UIControlState.normal)
-            // assume button is showing "stop"
-            // we need to change button background to "play"
             playing = false
         } else {
-            // assume button's current image is play
-            // we need to change it to "stop"
-            controlButton.setBackgroundImage(UIImage(named: "stop button.png"), for: UIControlState.normal)
-            playing = true
+            if let plant = boxView.plantInBox {
+                let lightWatt = lightWatts[boxView.lightChoice]
+                if let data = growerDatabase.getExperiment(
+                    plant: plant, watt: lightWatt) {
+                    print("\(data)")
+                    currentExperiment = data
+                    currentSet = 0
+                    playTimer = Timer.scheduledTimer(
+                        timeInterval: 1.0, target: self, selector: #selector(showData),
+                        userInfo: nil, repeats: true)
+                    playing = true
+                }
+            }
         }
         
     }
     
+    @objc func showData() {
+        if let timer = playTimer {
+            if let experiment = currentExperiment {
+                if currentSet >= experiment.measurements.count {
+                    timer.invalidate()
+                    playing = false
+                } else {
+                    let data = experiment.measurements[currentSet]
+                    print("Timer \(data)")
+                    currentSet += 1
+                }
+            } else {
+                timer.invalidate()
+                playing = false
+            }
+        }
+    }
     
+    let growerDatabase = GrowerDatabase()
+    var currentExperiment: Experiment?
+    var currentSet = 0
+    var playTimer: Timer?
 }
