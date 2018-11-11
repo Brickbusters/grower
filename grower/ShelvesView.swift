@@ -29,9 +29,6 @@ class ShelvesView: UIView, UIDragInteractionDelegate {
     }
     var blueberryImageView: UIImageView?
     
-    func dragInteraction(_ interaction: UIDragInteraction, itemsForBeginning session: UIDragSession) -> [UIDragItem] {
-        return []
-    }
     
     /*
     // Only override draw() if you perform custom drawing.
@@ -98,4 +95,20 @@ class ShelvesView: UIView, UIDragInteractionDelegate {
             addSubview(Blueberry)
         }
     }
+    
+    func dragInteraction(_ interaction: UIDragInteraction, itemsForBeginning session: UIDragSession) -> [UIDragItem] {
+        let fingerLocation = session.location(in: self)
+        if kaleImageView!.frame.contains(fingerLocation){
+            let provider = NSItemProvider(object: NSString(string:Plant.Kale.rawValue))
+            let item = UIDragItem(itemProvider: provider)
+            return [item]
+        } else if blueberryImageView!.frame.contains(fingerLocation){
+            let provider = NSItemProvider(object: NSString(string:Plant.Blueberry.rawValue))
+            let item = UIDragItem(itemProvider: provider)
+            return [item]
+        } else {
+            return []
+        }
+    }
+
 }
