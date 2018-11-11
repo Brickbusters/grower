@@ -125,4 +125,28 @@ class ViewController: UIViewController, UIDropInteractionDelegate,
             }
         }
     }
+    
+    var playing = false
+    @IBOutlet weak var controlButton: UIButton!
+    
+    @IBAction func playButton(_ sender: UIButton) {
+        controlButton.setBackgroundImage(UIImage(named: "stop button.png"), for: UIControlState.normal)
+        print("button clicked")
+        
+        if (playing) {
+            print("button clicked")
+            controlButton.setBackgroundImage(UIImage(named: "play button.png"), for: UIControlState.normal)
+            // assume button is showing "stop"
+            // we need to change button background to "play"
+            playing = false
+        } else {
+            // assume button's current image is play
+            // we need to change it to "stop"
+            controlButton.setBackgroundImage(UIImage(named: "stop button.png"), for: UIControlState.normal)
+            playing = true
+        }
+        
+    }
+    
+    
 }
