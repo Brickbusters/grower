@@ -14,6 +14,7 @@ class BoxView: UIView {
     let w = CGFloat(250)
     let d = CGFloat(180)
     let t = CGFloat(180 * 1.2)
+    let lightCaption = UILabel()
     let plantCaption = UILabel()
     
     
@@ -25,6 +26,8 @@ class BoxView: UIView {
     
     let lightRadius = [CGFloat(20), CGFloat(24), CGFloat(28), CGFloat(32)]
     let lightBrightness = [CGFloat(0.85), CGFloat(0.89), CGFloat(0.92), CGFloat(0.95)]
+    let lightWatts = [80, 130, 200, 400]
+    
     var lightChoice = 0 {
         didSet {
             setNeedsDisplay()
@@ -94,9 +97,14 @@ class BoxView: UIView {
         } else{
             let _ = drawSide(f1,f2,b2,b1,UIColor.green)
         }
+
+        let lightWatt = lightWatts[lightChoice]
+        displayLabel(label: lightCaption, text: "\(lightWatt)W",
+            x: 60, y: 420, width: w, height: 40)
+        
         if let plant = plantInBox {
-            displayLabel(label: plantCaption, text: plant.rawValue, x: 50,
-                         y: 400, width: w, height: h)
+            displayLabel(label: plantCaption, text: plant.rawValue,
+                         x: 60, y: 550, width: w, height: 40)
         } else {
             plantCaption.removeFromSuperview()
         }
@@ -106,10 +114,10 @@ class BoxView: UIView {
                       width: CGFloat, height: CGFloat) {
         addSubview(label)
         label.text = text
-        label.font = label.font.withSize(60)
+        label.font = label.font.withSize(24)
         label.frame = CGRect(x: x, y: y, width: width, height: height)
         label.center = CGPoint(x: x + width / 2, y: y + height / 2)
-        label.textAlignment = .right
+        label.textAlignment = .center
         label.setNeedsDisplay()
     }
 }

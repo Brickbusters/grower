@@ -9,7 +9,15 @@
 import UIKit
 
 class MonitorView: UIView {
-   
+    let topleft = CGPoint (x: 45, y: 180)
+    let h = CGFloat(400)
+    let w = CGFloat(130)
+    let barWidth = CGFloat(130/8) // temperature and light status bar width
+    let lowestTemp = CGFloat(40)
+    let highestTemp = CGFloat(90)
+    let lowestLux = CGFloat(0)
+    let highestLux = CGFloat(2000)
+
     var tempLabel90 = UILabel()
     var tempLabel80 = UILabel()
     var tempLabel70 = UILabel()
@@ -20,6 +28,21 @@ class MonitorView: UIView {
     var luxLabel1500 = UILabel()
     var luxLabel1000 = UILabel()
     var luxLabel500 = UILabel()
+    
+    var dayLabel = UILabel()
+    var resultLabel = UILabel()
+    
+    var temperature: UInt = 40 {
+        didSet {
+            setNeedsDisplay()
+        }
+    }
+    
+    var lux: UInt = 0 {
+        didSet {
+            setNeedsDisplay()
+        }
+    }
 
     func displayLabel(label: UILabel, text: String,
                       x: CGFloat, y: CGFloat,
@@ -32,13 +55,33 @@ class MonitorView: UIView {
         label.setNeedsDisplay()
     }
     
+    func getTempBarHeight() -> CGFloat {
+        let tempRange = highestTemp - lowestTemp
+        return (CGFloat(temperature) - lowestTemp) / tempRange * h
+    }
+    
+    func getLuxBarHeight() -> CGFloat {
+        let luxRange = highestLux - lowestLux
+        return (CGFloat(lux) - lowestLux) / luxRange * h
+    }
+    
+    func drawStatusBar(base: CGPoint, height: CGFloat, color: UIColor) {
+        let bar = UIBezierPath()
+        
+        bar.move(to: base)
+        bar.addLine(to: CGPoint(x: base.x + barWidth, y: base.y))
+        bar.addLine(to: CGPoint(x: base.x + barWidth, y: base.y - height))
+        bar.addLine(to: CGPoint(x: base.x, y: base.y - height))
+        bar.close()
+        
+        color.setFill()
+        bar.fill()
+    }
+    
     // Only override draw() if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
     override func draw(_ rect: CGRect) {
         // Drawing code
-        let topleft = CGPoint (x: 45, y: 180)
-        let h = CGFloat(400)
-        let w = CGFloat(130)
         let bottomleft = CGPoint(x: topleft.x,y: topleft.y + h)
         let bottomright = CGPoint(x: bottomleft.x + w, y: bottomleft.y)
         let topright = CGPoint(x: topleft.x + w, y: topleft.y)
@@ -106,7 +149,9 @@ class MonitorView: UIView {
         displayLabel(label: luxLabel500, text: "500",
                      x: l500.x + 11, y: l500.y - 20, width: 40, height: 40)
 
-        
-        
+        let tempBarBase = CGPoint(x: bottomleft.x + w * 2 / 8, y: bottomleft.y)
+        drawStatusBar(base: tempBarBase, height: getTempBarHeight(), color: UIColor.red)
+        let luxBarBase = CGPoint(x: bottomleft.x + w * 5 / 8, y: bottomleft.y)
+        drawStatusBar(base: luxBarBase, height: getLuxBarHeight(), color: UIColor.blue)
     }
 }
