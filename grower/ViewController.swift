@@ -8,7 +8,9 @@
 
 import UIKit
 
-class ViewController: UIViewController, UIDropInteractionDelegate {
+class ViewController: UIViewController, UIDropInteractionDelegate,
+    UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout
+{
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,8 +41,44 @@ class ViewController: UIViewController, UIDropInteractionDelegate {
             downSwipe.direction = .down
             boxView.addGestureRecognizer(upSwipe)
             boxView.addGestureRecognizer(downSwipe)
+            let singleTap = UITapGestureRecognizer(target: self, action: #selector(showLightCollection))
+            singleTap.numberOfTapsRequired = 1
+            boxView.addGestureRecognizer(singleTap)
             boxView.addInteraction(UIDropInteraction(delegate: self))
         }
+    }
+    
+    var lightCollectionVisible = false {
+        didSet {
+            lightCollectionView.isHidden = !lightCollectionVisible
+        }
+    }
+    @IBOutlet weak var lightCollectionView: UICollectionView! {
+        didSet {
+            lightCollectionView.isHidden = true
+            lightCollectionView.dataSource = self
+            lightCollectionView.delegate = self
+        }
+    }
+    
+    var lightPictures = ["Lightbulb80.jpg", "Lightbulb130.jpg", "Lightbulb200.jpg", "Lightbulb400.jpg"]
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return lightPictures.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LightCell", for: indexPath)
+        if let lightCell = cell as? LightCollectionViewCell {
+            let lightImage = filterBlueBackground(UIImage(named: lightPictures[indexPath.item])!)
+            lightCell.image.image = lightImage
+        }
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt: IndexPath) {
+        print("selected \(didSelectItemAt.item)")
+        boxView.lightChoice = didSelectItemAt.item
+        lightCollectionVisible = false
     }
     
     @IBOutlet weak var monitorView: MonitorView!
@@ -75,6 +113,16 @@ class ViewController: UIViewController, UIDropInteractionDelegate {
                 self.boxView.plantInBox = Plant(rawValue: plant)
             }
             
+        }
+    }
+    
+    @objc func showLightCollection(_ sender: UITapGestureRecognizer) {
+        if boxView.lidOpen {
+            let fingerLocation = sender.location(in: boxView)
+            if (fingerLocation.y < boxView.bounds.size.height / 2 &&
+                fingerLocation.y > 150) {
+                lightCollectionVisible = !lightCollectionVisible
+            }
         }
     }
 }
