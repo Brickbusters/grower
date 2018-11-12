@@ -24,10 +24,14 @@ class MonitorView: UIView {
     var tempLabel60 = UILabel()
     var tempLabel50 = UILabel()
     
+    var temperLabel = UILabel()
+    
     var luxLabel2000 = UILabel()
     var luxLabel1500 = UILabel()
     var luxLabel1000 = UILabel()
     var luxLabel500 = UILabel()
+    
+    var luxLabel = UILabel()
     
     var dayLabel = UILabel()
     var resultLabel = UILabel()
@@ -138,6 +142,8 @@ class MonitorView: UIView {
                      x: t60.x - 45, y: t60.y - 20, width: 35, height: 40)
         displayLabel(label: tempLabel50, text: "50",
                      x: t50.x - 45, y: t50.y - 20, width: 35, height: 40)
+        displayLabel(label: temperLabel, text: "°F",
+                     x: topleft.x - 30, y: topleft.y - 40, width: 35, height: 40)
         
         
         displayLabel(label: luxLabel2000, text: "2000",
@@ -148,6 +154,8 @@ class MonitorView: UIView {
                      x: l1000.x + 11, y: l1000.y - 20, width: 50, height: 40)
         displayLabel(label: luxLabel500, text: "500",
                      x: l500.x + 11, y: l500.y - 20, width: 40, height: 40)
+        displayLabel(label: luxLabel, text: "LUX",
+                     x: topright.x - 25, y: topright.y - 40, width: 40, height: 40)
 
         let tempBarBase = CGPoint(x: bottomleft.x + w * 2 / 8, y: bottomleft.y)
         drawStatusBar(base: tempBarBase, height: getTempBarHeight(), color: UIColor.red)
